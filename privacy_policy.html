@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - SecretarIA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #004D40; /* Verde Escuro, baseado na sugestão de logo */
+            border-bottom: 2px solid #004D40;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #343a40; /* Cinza Chumbo */
+            margin-top: 25px;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        .contact-info {
+            padding: 15px;
+            background-color: #e9ecef;
+            border-left: 5px solid #FF8C00; /* Laranja Vibrante */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Política de Privacidade - SecretarIA</h1>
+
+        <p>Esta Política de Privacidade descreve como o SecretarIA coleta, usa, processa e compartilha as informações de nossos usuários. Nosso objetivo é fornecer uma ferramenta de agendamento e gerenciamento de tempo eficiente, garantindo a máxima transparência e segurança dos dados. Esta política está em conformidade com os requisitos da Meta Platforms, Inc. (Meta).</p>
+
+        <p><strong>Última Atualização:</strong> 02 de Dezembro de 2025</p>
+
+        <h2>1. Coleta de Informações</h2>
+
+        <p>Coletamos informações dos nossos usuários em duas categorias principais: <strong>Profissionais</strong> (clientes pagantes do SecretarIA) e <strong>Clientes Finais</strong> (clientes dos Profissionais).</p>
+
+        <h3>1.1. Informações Coletadas do Profissional</h3>
+        <ul>
+            [cite_start]<li>**Dados de Identidade e Acesso:** Coletamos seu ID de usuário único (`user_id`), endereço de e-mail e nome completo[cite: 97, 300, 303, 308]. [cite_start]Usamos o Supabase Auth para gerenciar seu login e função (**Admin** ou **Profissional/Subscriber**)[cite: 19, 300].</li>
+            <li>**Dados de Negócio e Configuração:** Coletamos o nome do negócio, segmento (ex: barbearia, clínica), descrição, endereço, telefone de contato e links sociais. [cite_start]Estes dados são injetados no Assistente de IA para fornecer um atendimento personalizado ao seu cliente[cite: 109, 120, 122].</li>
+            <li>**Dados de Portfólio e Agenda:** Coletamos a lista de serviços oferecidos (título, duração) e sua grade de horários de trabalho semanal. [cite_start]Essas informações são essenciais para que o assistente de IA possa validar a disponibilidade e calcular o tempo de agendamento[cite: 149, 169].</li>
+            [cite_start]<li>**Credenciais de Integração:** Coletamos e armazenamos de forma criptografada tokens de acesso (como o `refresh_token` do Google Calendar) para gerenciar as conexões externas[cite: 321].</li>
+        </ul>
+
+        <h3>1.2. Informações Coletadas do Cliente Final</h3>
+        <ul>
+            <li>**Dados de Comunicação:** Quando um cliente envia uma mensagem ao número de WhatsApp do Profissional (via webhook), coletamos o ID do WhatsApp (`wa_id`, que é o número de telefone), o nome (se fornecido) e o histórico da conversa. [cite_start]Estes são registrados como "Leads" e são vinculados exclusivamente ao Profissional para fins de agendamento[cite: 324, 326].</li>
+            [cite_start]<li>**Informações de Uso (Coleta Automática):** Coletamos automaticamente dados de uso da plataforma (logs de acesso, IPs, tempo de processamento) para fins de observabilidade (RNF4), rastreamento (RNF5) e proteção anti-spam/rate-limiting (RNF-NOVO)[cite: 446, 450].</li>
+        </ul>
+
+        <h2>2. Uso da Informação (Propósito do Processamento)</h2>
+
+        Utilizamos a informação coletada estritamente para os seguintes propósitos, alinhados com nossos requisitos de negócio:
+
+        <ul>
+            [cite_start]<li>**Fornecer o Serviço Principal:** Para que o Assistente de IA possa processar mensagens (RF4.1), interpretar intenções (RF4.3), validar disponibilidade (RF4.6) e escrever eventos de agendamento na sua agenda (RF4.8)[cite: 224, 433].</li>
+            [cite_start]<li>**Personalização do Serviço:** Usamos as configurações de negócio (UC-02) para que a IA se apresente corretamente e responda com o contexto da sua empresa[cite: 109, 432].</li>
+            [cite_start]<li>**Gestão de Conta e Segurança:** Para identificar e autenticar o Profissional (RF2.1), definir seu plano/função (Admin, Profissional) e gerenciar o status da conta (suspensão/ativação)[cite: 300, 416].</li>
+            [cite_start]<li>**Controle de Custos e Abuso:** Para aplicar quotas de uso e rate-limiting (RNF-NOVO) a fim de proteger a estabilidade do serviço e evitar custos descontrolados de APIs de terceiros (IA)[cite: 446].</li>
+        </ul>
+
+        <h2>3. Compartilhamento de Informações e Terceiros</h2>
+
+        O SecretarIA utiliza uma arquitetura híbrida (RNF2) que depende de terceiros para a funcionalidade principal:
+
+        <ul>
+            [cite_start]<li>**Google Calendar:** Com sua autorização (RF3.1), lemos sua disponibilidade (Livre/Ocupado) e escrevemos novos agendamentos em sua agenda[cite: 424, 434, 436]. Não acessamos o conteúdo detalhado de eventos que não sejam criados pelo SecretarIA.</li>
+            <li>**WhatsApp / Meta:** Utilizamos a plataforma de comunicação do WhatsApp (RNF7) para receber e enviar mensagens do Cliente Final (RF4.1).</li>
+            [cite_start]<li>**Supabase:** É utilizado como Provedor de Identidade (Auth) e para hospedar o banco de dados PostgreSQL (BD Relacional)[cite: 19].</li>
+            [cite_start]<li>**AWS (Amazon Web Services):** Serviços como Lambda, SQS e DynamoDB são usados para o processamento de tarefas, hospedagem da API e memória de chat[cite: 19].</li>
+        </ul>
+
+        <p>Seus dados não são vendidos ou alugados. São compartilhados apenas na medida estritamente necessária para fornecer as funcionalidades contratadas.</p>
+
+        <h2>4. Direitos do Usuário e Exclusão de Dados</h2>
+
+        <p>Como usuário do SecretarIA (Profissional), você tem o direito de acessar, corrigir ou solicitar a exclusão de seus dados. Para cumprir os requisitos de exclusão de dados da Meta e outras regulamentações:</p>
+
+        <div class="contact-info">
+            <p>Se você deseja **solicitar a exclusão de sua conta e de todos os dados associados** ao SecretarIA, por favor, envie um e-mail com o assunto "Solicitação de Exclusão de Dados" para:</p>
+            <p><strong>E-mail para Exclusão de Dados:</strong> murilochiari@gmail.com</p>
+            <p>Iremos processar sua solicitação e confirmar a exclusão dentro do prazo legal aplicável.</p>
+        </div>
+
+        <p>Para dúvidas sobre esta política, entre em contato conosco por meio do e-mail acima.</p>
+
+    </div>
+</body>
+</html>
