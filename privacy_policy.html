@@ -56,16 +56,16 @@
 
         <h3>1.1. Informações Coletadas do Profissional</h3>
         <ul>
-            <li>**Dados de Identidade e Acesso:** Coletamos seu ID de usuário único (`user_id`), endereço de e-mail e nome completo[cite: 97, 300, 303, 308]. Usamos o Supabase Auth para gerenciar seu login e função (**Admin** ou **Profissional/Subscriber**)[cite: 19, 300].</li>
-            <li>**Dados de Negócio e Configuração:** Coletamos o nome do negócio, segmento (ex: barbearia, clínica), descrição, endereço, telefone de contato e links sociais. Estes dados são injetados no Assistente de IA para fornecer um atendimento personalizado ao seu cliente[cite: 109, 120, 122].</li>
-            <li>**Dados de Portfólio e Agenda:** Coletamos a lista de serviços oferecidos (título, duração) e sua grade de horários de trabalho semanal. Essas informações são essenciais para que o assistente de IA possa validar a disponibilidade e calcular o tempo de agendamento[cite: 149, 169].</li>
-            <li>**Credenciais de Integração:** Coletamos e armazenamos de forma criptografada tokens de acesso (como o `refresh_token` do Google Calendar) para gerenciar as conexões externas[cite: 321].</li>
+            <li>**Dados de Identidade e Acesso:** Coletamos seu ID de usuário único (`user_id`), endereço de e-mail e nome completo. Usamos o Supabase Auth para gerenciar seu login e função (**Admin** ou **Profissional/Subscriber**).</li>
+            <li>**Dados de Negócio e Configuração:** Coletamos o nome do negócio, segmento (ex: barbearia, clínica), descrição, endereço, telefone de contato e links sociais. Estes dados são injetados no Assistente de IA para fornecer um atendimento personalizado ao seu cliente.</li>
+            <li>**Dados de Portfólio e Agenda:** Coletamos a lista de serviços oferecidos (título, duração) e sua grade de horários de trabalho semanal. Essas informações são essenciais para que o assistente de IA possa validar a disponibilidade e calcular o tempo de agendamento.</li>
+            <li>**Credenciais de Integração:** Coletamos e armazenamos de forma criptografada tokens de acesso (como o `refresh_token` do Google Calendar) para gerenciar as conexões externas.</li>
         </ul>
 
         <h3>1.2. Informações Coletadas do Cliente Final</h3>
         <ul>
-            <li>**Dados de Comunicação:** Quando um cliente envia uma mensagem ao número de WhatsApp do Profissional (via webhook), coletamos o ID do WhatsApp (`wa_id`, que é o número de telefone), o nome (se fornecido) e o histórico da conversa. Estes são registrados como "Leads" e são vinculados exclusivamente ao Profissional para fins de agendamento[cite: 324, 326].</li>
-            <li>**Informações de Uso (Coleta Automática):** Coletamos automaticamente dados de uso da plataforma (logs de acesso, IPs, tempo de processamento) para fins de observabilidade (RNF4), rastreamento (RNF5) e proteção anti-spam/rate-limiting (RNF-NOVO)[cite: 446, 450].</li>
+            <li>**Dados de Comunicação:** Quando um cliente envia uma mensagem ao número de WhatsApp do Profissional (via webhook), coletamos o ID do WhatsApp (`wa_id`, que é o número de telefone), o nome (se fornecido) e o histórico da conversa. Estes são registrados como "Leads" e são vinculados exclusivamente ao Profissional para fins de agendamento.</li>
+            <li>**Informações de Uso (Coleta Automática):** Coletamos automaticamente dados de uso da plataforma (logs de acesso, IPs, tempo de processamento) para fins de observabilidade, rastreamento e proteção anti-spam/rate-limiting.</li>
         </ul>
 
         <h2>2. Uso da Informação (Propósito do Processamento)</h2>
@@ -73,21 +73,21 @@
         Utilizamos a informação coletada estritamente para os seguintes propósitos, alinhados com nossos requisitos de negócio:
 
         <ul>
-            <li>**Fornecer o Serviço Principal:** Para que o Assistente de IA possa processar mensagens (RF4.1), interpretar intenções (RF4.3), validar disponibilidade (RF4.6) e escrever eventos de agendamento na sua agenda (RF4.8)[cite: 224, 433].</li>
-            <li>**Personalização do Serviço:** Usamos as configurações de negócio (UC-02) para que a IA se apresente corretamente e responda com o contexto da sua empresa[cite: 109, 432].</li>
-            <li>**Gestão de Conta e Segurança:** Para identificar e autenticar o Profissional (RF2.1), definir seu plano/função (Admin, Profissional) e gerenciar o status da conta (suspensão/ativação)[cite: 300, 416].</li>
-            <li>**Controle de Custos e Abuso:** Para aplicar quotas de uso e rate-limiting (RNF-NOVO) a fim de proteger a estabilidade do serviço e evitar custos descontrolados de APIs de terceiros (IA)[cite: 446].</li>
+            <li>**Fornecer o Serviço Principal:** Para que o Assistente de IA possa processar mensagens, interpretar intenções, validar disponibilidade e escrever eventos de agendamento na sua agenda.</li>
+            <li>**Personalização do Serviço:** Usamos as configurações de negócio para que a IA se apresente corretamente e responda com o contexto da sua empresa.</li>
+            <li>**Gestão de Conta e Segurança:** Para identificar e autenticar o Profissional, definir seu plano/função (Admin, Profissional) e gerenciar o status da conta.</li>
+            <li>**Controle de Custos e Abuso:** Para aplicar quotas de uso e rate-limiting a fim de proteger a estabilidade do serviço e evitar custos descontrolados de APIs de terceiros (IA).</li>
         </ul>
 
         <h2>3. Compartilhamento de Informações e Terceiros</h2>
 
-        O SecretarIA utiliza uma arquitetura híbrida (RNF2) que depende de terceiros para a funcionalidade principal:
+        <p>O SecretarIA utiliza uma arquitetura híbrida que depende de terceiros para a funcionalidade principal:</p>
 
         <ul>
-            <li>**Google Calendar:** Com sua autorização (RF3.1), lemos sua disponibilidade (Livre/Ocupado) e escrevemos novos agendamentos em sua agenda[cite: 424, 434, 436]. Não acessamos o conteúdo detalhado de eventos que não sejam criados pelo SecretarIA.</li>
-            <li>**WhatsApp / Meta:** Utilizamos a plataforma de comunicação do WhatsApp (RNF7) para receber e enviar mensagens do Cliente Final (RF4.1).</li>
-            <li>**Supabase:** É utilizado como Provedor de Identidade (Auth) e para hospedar o banco de dados PostgreSQL (BD Relacional)[cite: 19].</li>
-            <li>**AWS (Amazon Web Services):** Serviços como Lambda, SQS e DynamoDB são usados para o processamento de tarefas, hospedagem da API e memória de chat[cite: 19].</li>
+            <li>**Google Calendar:** Com sua autorização, lemos sua disponibilidade (Livre/Ocupado) e escrevemos novos agendamentos em sua agenda. Não acessamos o conteúdo detalhado de eventos que não sejam criados pelo SecretarIA.</li>
+            <li>**WhatsApp / Meta:** Utilizamos a plataforma de comunicação do WhatsApp para receber e enviar mensagens do Cliente Final.</li>
+            <li>**Supabase:** É utilizado como Provedor de Identidade (Auth) e para hospedar o banco de dados PostgreSQL.</li>
+            <li>**AWS (Amazon Web Services):** Serviços como Lambda, SQS e DynamoDB são usados para o processamento de tarefas, hospedagem da API e memória de chat.</li>
         </ul>
 
         <p>Seus dados não são vendidos ou alugados. São compartilhados apenas na medida estritamente necessária para fornecer as funcionalidades contratadas.</p>
@@ -98,7 +98,7 @@
 
         <div class="contact-info">
             <p>Se você deseja **solicitar a exclusão de sua conta e de todos os dados associados** ao SecretarIA, por favor, envie um e-mail com o assunto "Solicitação de Exclusão de Dados" para:</p>
-            <p><strong>E-mail para Exclusão de Dados:</strong> murilochiari@gmail.com</p>
+            <p><strong>E-mail para Exclusão de Dados:</strong> murilofchiari@gmail.com</p>
             <p>Iremos processar sua solicitação e confirmar a exclusão dentro do prazo legal aplicável.</p>
         </div>
 
